@@ -4,13 +4,13 @@ import dev.diegofernando.apiserver.annotations.SchemaTestsScan;
 
 @SchemaTestsScan(key = "messageV1")
 public class Message {
-    private double fee;
+    private String text;
 
-    public double getFee() {
-        return fee;
+    public String getText() {
+        return text;
     }
 
-    public void setFee(double fee) {
-        this.fee = fee;
+    public void setText(String text) {
+        this.text = text;
     }
 }

@@ -6,7 +6,7 @@
     },
     {
       "name": "messageV1",
-      "file": "bW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiAoam9pLCBwYXlsb2FkKSB7CiAgICBjb25zdCBzY2hlbWEgPSBqb2kub2JqZWN0KCkua2V5cyh7CiAgICAgICAgZmVlOiBqb2kubnVtYmVyKCksCiAgICB9KS5yZXF1aXJlZCgpOwoKICAgIHJldHVybiBzY2hlbWEudmFsaWRhdGUocGF5bG9hZCk7Cn07"
+      "file": "bW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiAoam9pLCBwYXlsb2FkKSB7CiAgICBjb25zdCBzY2hlbWEgPSBqb2kub2JqZWN0KCkua2V5cyh7CiAgICAgICAgdGV4dDogam9pLnN0cmluZygpLAogICAgfSkucmVxdWlyZWQoKTsKCiAgICByZXR1cm4gc2NoZW1hLnZhbGlkYXRlKHBheWxvYWQpOwp9Ow=="
     },
     {
       "name": "new",
