@@ -64,7 +64,39 @@ jobs:
           run: |
             echo ${{ steps.request-to-lambda.outputs.response }}
             echo ${{ fromJson(steps.request-to-lambda.outputs.response).status }}
-            
+
+        - name: Comment PR new schemas and update
+          if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'SUCCESS_SCHEMA_TESTS_AND_SCHEMA_UPDATE_BY_OWNER' }}
+          uses: mshick/add-pr-comment@v1
+          with:
+            message: |
+              **SUCCESS_SCHEMA_TESTS_AND_SCHEMA_UPDATE_BY_OWNER**
+              Some changes from schema tests where the backend is the owner were detected. View the logs and exercise 
+              caution when proceeding with changes
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            allow-repeats: true
+
+        - name: Comment PR new schemas
+          if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'SCHEMA_UPDATE_BY_OWNER' }}
+          uses: mshick/add-pr-comment@v1
+          with:
+            message: |
+              **SCHEMA_UPDATE_BY_OWNER**
+              Some changes from schema tests where the backend is the owner were detected. View the logs and exercise
+              caution when proceeding with changes
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            allow-repeats: true
+
+        - name: Comment PR on fail
+          if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'FAILED_SCHEMA_TEST' }}
+          uses: mshick/add-pr-comment@v1
+          with:
+            message: |
+              **FAILED_SCHEMA_TEST**
+              Oops! Some schema tests failed! :crying_cat_face: See the logs.
+            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            allow-repeats: true
+
         - name: Check result fail
           if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'FAILED_SCHEMA_TEST' }}
           uses: actions/github-script@v3
@@ -78,26 +110,6 @@ jobs:
           with:
             script: |
               core.warning('[SUCCESS_SCHEMA_TESTS_AND_SCHEMA_UPDATE_BY_OWNER] Some changes from schema tests where the backend is the owner were detected. View the logs and exercise caution when proceeding with changes');
-
-        - name: Comment PR
-          if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'SUCCESS_SCHEMA_TESTS_AND_SCHEMA_UPDATE_BY_OWNER' }}
-          uses: mshick/add-pr-comment@v1
-          with:
-            message: |
-              **SUCCESS_SCHEMA_TESTS_AND_SCHEMA_UPDATE_BY_OWNER**
-              Some changes from schema tests where the backend is the owner were detected. View the logs and exercise caution when proceeding with changes
-            repo-token: ${{ secrets.GITHUB_TOKEN }}
-            allow-repeats: true
-
-        - name: Comment PR on fail
-          if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'FAILED_SCHEMA_TEST' }}
-          uses: mshick/add-pr-comment@v1
-          with:
-            message: |
-              **FAILED_SCHEMA_TEST**
-              Oops! Some schema tests failed! :crying_cat_face: See the logs.
-            repo-token: ${{ secrets.GITHUB_TOKEN }}
-            allow-repeats: true
 
         - name: Check result warning update
           if: ${{ fromJson(steps.request-to-lambda.outputs.response).status == 'SCHEMA_UPDATE_BY_OWNER' }}
