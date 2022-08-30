@@ -5,6 +5,10 @@
       "file": "bW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiAoam9pLCBwYXlsb2FkKSB7CiAgICBjb25zdCBzY2hlbWEgPSBqb2kub2JqZWN0KCkua2V5cyh7CiAgICAgICAgaWQ6IGpvaS5udW1iZXIoKSwKICAgICAgICBuYW1lOiBqb2kuc3RyaW5nKCksCiAgICAgICAgZmVlOiBqb2kuc3RyaW5nKCksCiAgICAgICAgZGV0YWlsczogam9pLm9iamVjdCgpLmtleXMoewogICAgICAgICAgICB0eXBlOiBqb2kuc3RyaW5nKCksCiAgICAgICAgICAgIGFjdGl2ZTogam9pLmJvb2xlYW4oKSwKICAgICAgICAgICAgZGF5czogam9pLm51bWJlcigpLAogICAgICAgIH0pCiAgICB9KS5yZXF1aXJlZCgpOwoKICAgIHJldHVybiBzY2hlbWEudmFsaWRhdGUocGF5bG9hZCk7Cn07"
     },
     {
+      "name": "cardV2",
+      "file": "bW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiAoam9pLCBwYXlsb2FkKSB7CiAgICBjb25zdCBzY2hlbWEgPSBqb2kub2JqZWN0KCkua2V5cyh7CiAgICAgICAgbmFtZTogam9pLnN0cmluZygpLAogICAgICAgIHR5cGU6IGpvaS5zdHJpbmcoKSwKICAgICAgICBvcmRlcjogam9pLm51bWJlcigpCiAgICB9KS5yZXF1aXJlZCgpOwoKICAgIHJldHVybiBzY2hlbWEudmFsaWRhdGUocGF5bG9hZCk7Cn07"
+    },
+    {
       "name": "messageV1",
       "file": "bW9kdWxlLmV4cG9ydHMgPSBmdW5jdGlvbiAoam9pLCBwYXlsb2FkKSB7CiAgICBjb25zdCBzY2hlbWEgPSBqb2kub2JqZWN0KCkua2V5cyh7CiAgICAgICAgZmVlOiBqb2kubnVtYmVyKCksCiAgICB9KS5yZXF1aXJlZCgpOwoKICAgIHJldHVybiBzY2hlbWEudmFsaWRhdGUocGF5bG9hZCk7Cn07"
     },
