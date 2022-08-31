@@ -8,30 +8,30 @@ function syncReadFile(filename) {
     return JSON.parse(contents);
 }
 
-let json = syncReadFile('../schemas.json');
-let cases = json['data'];
+let jsonFromFakeObjects = syncReadFile('../schemas.json');
+let casesFromFakeObjects = jsonFromFakeObjects['data'];
 
 let hasContractsNotDefined = false;
 let hasContractsWithError = false;
 
-for (let i = 0; i < cases.length; i++) {
-    let mockCase = cases[i];
+for (let i = 0; i < casesFromFakeObjects.length; i++) {
+    let fakeObject = casesFromFakeObjects[i];
     try {
-        const testCase = require('./schemas/'+mockCase['key']);
-        const { error } = testCase(Joi, mockCase['object']);
+        const joiTestCase = require('./schemas/'+fakeObject['key']);
+        const { error } = joiTestCase(Joi, fakeObject['object']);
 
         if (error != null){
-            console.log("[FAIL] Schema test fail '" + mockCase['key'] + "' ⤵ :");
+            console.log("[FAIL] Schema test fail '" + fakeObject['key'] + "' ⤵ :");
             console.log(error);
             hasContractsWithError = true;
         } else {
-            console.log("[SUCCESS] Schema test ok! '" + mockCase['key'] + "'");
+            console.log("[SUCCESS] Schema test ok! '" + fakeObject['key'] + "'");
         }
 
     } catch (e) {
         hasContractsNotDefined = true;
         if (e.code === 'MODULE_NOT_FOUND') {
-            console.log("[ERROR] Schema test not defined for '" + mockCase['key'] + "'")
+            console.log("[ERROR] Schema test not defined for '" + fakeObject['key'] + "'")
         }
     }
 }
@@ -49,32 +49,31 @@ let payloadToPushSchemaTests = {
     schemaTests: [],
 }
 
-const args = process.argv.slice(2);
-let files;
+const commandLineArgs = process.argv.slice(2);
+let fileArgs;
 
-if (args.length > 0) {
-    files = args;
-    for (let i = 0; i < files.length; i++) {
-        files[i] = files[i] + '.js';
+if (commandLineArgs.length > 0) {
+    fileArgs = commandLineArgs;
+    for (let i = 0; i < fileArgs.length; i++) {
+        fileArgs[i] = fileArgs[i] + '.js';
     }
 } else {
-    const directoryPath = path.join(__dirname, 'schemas');
-    files = fs.readdirSync(directoryPath);
+    const joiTestsDirectoryPath = path.join(__dirname, 'schemas');
+    fileArgs = fs.readdirSync(joiTestsDirectoryPath);
 }
 
-files.forEach(function (file) {
+fileArgs.forEach(function (file) {
 
     if (file !== '.schema-data.json'){
         const buffer = readFileSync("schemas/"+file);
-
         const fileContent = buffer.toString();
 
-        let b = Buffer.from(fileContent);
-        let s = b.toString('base64');
+        let bufferFromFile = Buffer.from(fileContent);
+        let contentFileBase64 = bufferFromFile.toString('base64');
 
         let schemaTest = {
             name: file.split('.js')[0],
-            file: s
+            file: contentFileBase64
         };
 
         payloadToPushSchemaTests.schemaTests.push(schemaTest);
