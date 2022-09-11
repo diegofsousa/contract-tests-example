@@ -22,9 +22,15 @@ import java.util.Set;
 import static org.reflections.scanners.Scanners.SubTypes;
 
 public class GenerateFakeObjects {
+
+    public static final String PACKAGE_PREFIX = "dev.diegofernando.apiserver";
+    public static final String SCHEMA_TESTS_PATH = "schema_tests";
+    public static final String SCHEMA_TESTS_FILE = "schemas.json";
+
+
     public static void main(String[] args) throws IOException {
 
-        Reflections reflections = new Reflections("dev.diegofernando.apiserver");
+        Reflections reflections = new Reflections(PACKAGE_PREFIX);
 
         Set<Class<?>> annotated =
                 reflections.get(SubTypes.of(Scanners.TypesAnnotated.with(SchemaTestsScan.class)).asClass());
@@ -49,13 +55,12 @@ public class GenerateFakeObjects {
         try {
             String json = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data);
 
-            Path path = Paths.get("schema_tests");
+            Path path = Paths.get(SCHEMA_TESTS_PATH);
             Files.createDirectories(path);
-            BufferedWriter writer = new BufferedWriter(new FileWriter("schema_tests/schemas.json"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(SCHEMA_TESTS_PATH + "/" + SCHEMA_TESTS_FILE));
             writer.write(json);
 
             writer.close();
-            System.out.println(json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
