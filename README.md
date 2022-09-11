@@ -6,7 +6,7 @@ This project is part of a lab on contract test practices. The main idea is to be
 
 The architecture follows the diagram below.
 
-![Architecture](/home/diego/estudos/contract-tests-java/apiserver/docs/architecture.png)
+![Architecture](docs/architecture.png)
 
 ## How to create a test schema
 
@@ -25,7 +25,7 @@ The architecture follows the diagram below.
 
 Here is the pipeline execution flow diagram:
 
-![Pull request flow](/home/diego/estudos/contract-tests-java/apiserver/docs/pull.png "Pull request flow")
+![Pull request flow](docs/pull.png "Pull request flow")
 
 1. After committing to a branch and making a **Pull Request** for the main branch, the pipeline will be triggered.
 2. After doing the validation using "node index.js", the pipeline sends the mocks to Lambda.
